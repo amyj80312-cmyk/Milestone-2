@@ -12,5 +12,5 @@ public class ConveyorBelt extends TransportCell {
 	{
 		monster.move(getEffect());
 	}
-	//doesnt need to override it van just take from super
+	//doesnt need to override it can just take from super
 }
