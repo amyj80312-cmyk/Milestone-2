@@ -94,7 +94,7 @@ public abstract class Monster implements Comparable<Monster> {
 	public abstract void executePowerupEffect(Monster opponentMonster);
 	
 	public boolean isConfused(){
-		return (confusionTurns!=0);
+		return (this.confusionTurns>0);
 
 	}
 	public void move(int distance){
@@ -103,11 +103,11 @@ public abstract class Monster implements Comparable<Monster> {
 			position+= Constants.BOARD_SIZE;
 		}
 	}
-	public void alterEnergy(int energy){
-		if (shielded == true && energy<0){
-			shielded = false;
+	public final void alterEnergy(int energy){
+		if (this.shielded == true && energy<0){
+			this.shielded = false;
 			}
-		else if (shielded==false){
+		else{
 			setEnergy(energy+this.energy);
 		}
 	}

@@ -29,7 +29,7 @@ public class Game {
 	    stationed.remove(player);
 	    stationed.remove(opponent);
 	    board.setStationedMonsters(stationed);
-	    //board.initializeBoard(DataLoader.readCells());
+	    board.initializeBoard(DataLoader.readCells());
 
 	}
 	
@@ -96,7 +96,7 @@ public class Game {
 		else
 		{
 			int roll = rollDice();
-			//Board.moveMonster(current,roll,getCurrentOpponent());
+			board.moveMonster(current,roll,getCurrentOpponent());
 		}
 		switchTurn();
 	}
