@@ -68,16 +68,14 @@ public class Board {
 				setCell(i,new Cell("Normal Cell"));}
 		
 		int doorsindex = 1;
+		int conveyorIndex = 0;
+		int sockIndex = 0;
 		for(int i=0;i<specialCells.size();i++){
 				Cell x = specialCells.get(i);
 				if (x instanceof DoorCell){
 				setCell(doorsindex,x);
-				doorsindex+=2;}}
-		
-		int conveyorIndex = 0;
-		int sockIndex = 0;
-		for(int i=0;i<specialCells.size();i++){
-			Cell x = specialCells.get(i); 
+				doorsindex+=2;
+				}
 			if (x instanceof ConveyorBelt){
 				setCell(Constants.CONVEYOR_CELL_INDICES[conveyorIndex++],x);
 			}
@@ -85,6 +83,7 @@ public class Board {
 				setCell(Constants.SOCK_CELL_INDICES[sockIndex++],x);
 				}
 			}
+	
 		for(int i=0;i<Constants.CARD_CELL_INDICES.length;i++){
 			setCell(Constants.CARD_CELL_INDICES[i],new CardCell("Card cell"));
 			}
