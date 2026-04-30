@@ -68,14 +68,15 @@ public class Board {
 				setCell(i,new Cell("Normal Cell"));}
 		
 		int doorsindex = 1;
-		for(int i=0;i<50;i++){
+		for(int i=0;i<specialCells.size();i++){
 				Cell x = specialCells.get(i);
+				if (x instanceof DoorCell){
 				setCell(doorsindex,x);
-				doorsindex+=2;}
+				doorsindex+=2;}}
 		
 		int conveyorIndex = 0;
 		int sockIndex = 0;
-		for(int i= 50;i<specialCells.size();i++){
+		for(int i=0;i<specialCells.size();i++){
 			Cell x = specialCells.get(i); 
 			if (x instanceof ConveyorBelt){
 				setCell(Constants.CONVEYOR_CELL_INDICES[conveyorIndex++],x);
@@ -134,10 +135,9 @@ public class Board {
 			}
 		if(currentMonster.isConfused()){
 			currentMonster.decrementConfusion();
-		}
 		if(opponentMonster.isConfused()){
 			opponentMonster.decrementConfusion();
-		}
+		}}
 		updateMonsterPositions(currentMonster,opponentMonster);
 		
 	}

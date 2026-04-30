@@ -17,20 +17,32 @@ public class Game {
 	private Monster current;
 	
 	public Game(Role playerRole) throws IOException {
-		this.board = new Board(DataLoader.readCards());
-		
-		this.allMonsters = DataLoader.readMonsters();
-		
-		this.player = selectRandomMonsterByRole(playerRole);
-		this.opponent = selectRandomMonsterByRole(playerRole == Role.SCARER ? Role.LAUGHER : Role.SCARER);
-		this.current = player;
-		
-	    ArrayList<Monster> stationed = new ArrayList<>(allMonsters);
-	    stationed.remove(player);
-	    stationed.remove(opponent);
-	    board.setStationedMonsters(stationed);
-	    board.initializeBoard(DataLoader.readCells());
+        this.board = new Board(DataLoader.readCards());
+        this.allMonsters = DataLoader.readMonsters();
+        ArrayList<Monster> unique = new ArrayList<>();
+        for(Monster m : allMonsters) {
+            boolean found = false;
+            for(Monster u : unique) {
+                if(u.getName().equals(m.getName())) {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found)
+                unique.add(m);
+        }
+        this.allMonsters=unique;
+        this.player = selectRandomMonsterByRole(playerRole);
+        this.opponent = selectRandomMonsterByRole(playerRole == Role.SCARER ? Role.LAUGHER : Role.SCARER);
+        this.current = player;
+        allMonsters.remove(player);
+        allMonsters.remove(opponent);
+        ArrayList<Monster> stationed = new ArrayList<>(allMonsters);
+        stationed.remove(player);
+        stationed.remove(opponent);
+        board.setStationedMonsters(stationed);
 
+        board.initializeBoard(DataLoader.readCells());
 	}
 	
 	public Board getBoard() {
@@ -84,7 +96,7 @@ public class Game {
 		current.alterEnergy(-Constants.POWERUP_COST);
 		current.executePowerupEffect(getCurrentOpponent());
 	}
-	public void switchTurn()
+	private void switchTurn()
 	{
 		current = getCurrentOpponent();
 	}
